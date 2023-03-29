@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ dish.model }}
+    <a href="{% url 'kitchen:dish-delete' pk=dish.id %}"
+       class="btn btn-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'kitchen:dish-update' pk=dish.id %}"
+       class="btn btn-secondary link-to-page">
+      Update
+    </a>
+  </h1>
+  <p>Dish type: ({{ dish.type.name }})</p>
+  <h1>Cooks</h1>
+    {% if user in dish.drivers.all %}
+      <a href="{% url 'kitchen:dish_cook_add_delete' pk=dish.id%}"
+         class="btn btn-danger">Delete me from this dish</a>
+    {% else %}
+      <a href="{% url 'kitchen:dish_cook_add_delete' pk=dish.id%}"
+         class="btn btn-success">Assign me to this dish</a>
+    {% endif %}
+  <hr>
+  <ul>
+    {% for driver in dish.cooks.all %}
+      <li>{{ cook.username }} ({{ cook.first_name }} {{ cook.last_name }})</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
