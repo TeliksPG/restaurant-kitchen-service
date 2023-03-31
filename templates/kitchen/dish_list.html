@@ -1,28 +1,110 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
-{% block content %}
-  <h1>
-    Dish list
-    <a href="{% url 'kitchen:dish-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
-  <form action="" method="get" class="form-inline">
-    {{ search_form|crispy }}
-    <input type="submit" value="🔍" class="btn btn-secondary">
-  </form>
 
-  {% if dish_list %}
-    <ul>
-      {% for dish in dish_list %}
-        <li>
-          <a href="{% url "kitchen:dish-detail" pk=dish.id %} ">{{ dish.id }}</a>
-          {{ dish.name }} ({{ dish.type.type }})
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>There are no dishes in kitchen!</p>
-  {% endif %}
+
+
+{% block content %}
+
+  {% include "includes/navigation-light.html" %}
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <div class="position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
+          <div class="container border-bottom">
+            <div class="row justify-space-between py-2">
+              <div class="col-lg-3 me-auto">
+                <p class="lead text-dark pt-1 mb-0">Dish list</p>
+              </div>
+              <div class="col-lg-2">
+                <div class="nav-wrapper position-relative end-0">
+                  <a href="{% url 'kitchen:dish-create' %}" class="btn bg-gradient-primary btn-sm me-2"
+                     aria-hidden="true"
+                     style="margin-bottom: 0">
+                    Create
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row text-center py-2 mt-3" style="height: 50px">
+            <div class="col-4 mx-auto">
+              <div class="input-group mb-4" style="margin: 0">
+                <form action="" method="get">
+                  {{ search_form|crispy }}
+                </form>
+              </div>
+            </div>
+          </div>
+
+          {% if dish_list %}
+            <div class="card border-0 shadow mb-4">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-centered table-nowrap mb-0 rounded">
+                    <thead class="thead-light">
+                    <tr>
+                      <th class="border-0 rounded-start">#</th>
+                      <th class="border-0">Name</th>
+                      <th class="border-0">Type</th>
+                      <th class="border-0">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for dish in dish_list %}
+                      <tr>
+                        <td><a href="{% url "kitchen:dish-detail" pk=dish.id %} ">{{ dish.id }}</a></td>
+                        <td><a href="{% url "kitchen:dish-detail" pk=dish.id %} ">{{ dish.name }}</a></td>
+                        <td>{{ dish.type.type }}</td>
+                        <td>{{ dish.price }}$</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <style type="text/css">
+                #centerLayer {
+                    margin-left: 35%;
+                    width: 40%;
+                    padding: 10px;
+                }
+            </style>
+            <div class="col-lg-12 mx-auto">
+              <div class="pagination" id="centerLayer">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                      <a href="?page=1">&laquo; first</a>
+                      <a href="?page={{ page_obj.previous_page_number }}">&lsaquo; previous</a>
+                    {% endif %}
+
+                  <span class="current-page">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                  {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next &rsaquo;</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+            </div>
+            </div>
+
+            </div>
+            </div>
+
+
+          {% else %}
+            <p>There are no dishes in the service!</p>
+          {% endif %}
 {% endblock %}
+
+
+
+
+

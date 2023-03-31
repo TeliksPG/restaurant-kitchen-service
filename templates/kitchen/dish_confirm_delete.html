@@ -1,10 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Delete dish?</h1>
-  <form action="" method="post">
-    {% csrf_token %}
+  {% include "includes/navigation-light.html" %}
 
-    <input type="submit" value="Yes" class="btn btn-danger">
-  </form>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+
+        <div class="position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
+          <div class="container border-bottom">
+            <div class="row justify-space-between py-2">
+              <div class="col-lg-3 me-auto">
+                <h2 class="lead text-dark pt-1 mb-0">Delete dish {{ dish.name }}?</h2>
+              </div>
+              <div class="col-lg-3">
+                <div class="nav-wrapper position-relative end-0">
+                  <ul class="nav nav-pills nav-fill flex-row p-1" role="tablist">
+                    <li class="nav-item">
+                      <form action="" method="post">
+                        {% csrf_token %}
+
+
+                        <input type="submit" value="Yes" class="btn btn-danger">
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'kitchen:dish-detail' pk=dish.id %}" class="btn btn-success">No</a>
+                    </li>
+                    </form>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

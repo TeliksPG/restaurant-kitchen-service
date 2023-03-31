@@ -1,33 +1,63 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>
-    Username: {{ cook.username }}
-    <a href="{% url 'kitchen:cook-delete' pk=cook.id%}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
-  </h1>
+  {% include "includes/navigation-light.html" %}
 
-  <p><strong>First name:</strong> {{ cook.first_name }}</p>
-  <p><strong>Last name:</strong> {{ cook.last_name }}</p>
-  <p><strong>License number:</strong>
-{#    {{ cook.license_number }}#}
-    <a href="{% url 'taxi:cook-update' pk=cook.id%}">
-      Update
-    </a>
-  </p>
-  <p><strong>Is staff:</strong> {{ cook.is_staff }}</p>
-
-{#  <div class="ml-3">#}
-{#    <h4>Cars</h4>#}
-{#    {% for car in cook.cars.all %}#}
-{#        <hr>#}
-{#        <p><strong>Model:</strong> {{ car.model }}</p>#}
-{#        <p><strong>Manufacturer:</strong> {{ car.manufacturer.name }}</p>#}
-{#        <p class="text-muted"><strong>Id:</strong> {{car.id}}</p>#}
-{#    {% empty %}#}
-{#      <p>No cars!</p>#}
-{#    {% endfor %}#}
-{#  </div>#}
-
+  <section class="py-sm-7 py-5 position-relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div class="row py-lg-7 py-5">
+            <div class="col-lg-3 col-md-5 position-relative my-auto">
+              <img class="img border-radius-lg max-width-200 w-100 position-relative z-index-2" src="{{ ASSETS_ROOT }}/img/chef-avatar.jpg">
+            </div>
+            <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mt-sm-0 mt-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4 class="mb-0">{{ cook.first_name }} {{ cook.last_name }}</h4>
+                <div class="d-block">
+                  <a href="{% url 'kitchen:cook-update' pk=cook.id %}" class="btn btn-dark">
+                    Update
+                  </a>
+                </div>
+                <div class="d-block">
+                  <a href="{% url 'kitchen:cook-delete' pk=cook.id %}" class="btn btn-danger">
+                    Delete
+                  </a>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-auto">
+                  <span class="h6">{{ cook.id }}</span>
+                  <span>Id</span>
+                </div>
+                <div class="col-auto">
+                  {% if cook.years_of_experience %}
+                    <span class="h6">
+                      {{ cook.years_of_experience }}
+                    </span>
+                    <span>Years of experience</span>
+                  {% endif %}
+                </div>
+                <div class="col-auto">
+                  <span class="h6">Is staff:</span>
+                  <span>{{ cook.is_staff }}</span>
+                </div>
+              </div>
+              <div class="ml-3">
+                  <h4>Dishes</h4>
+                  {% for dish in cook.dishes.all %}
+                    <hr>
+                    <p><strong>Dish:</strong> {{ dish.name }}</p>
+                    <p><strong>Dish type:</strong> {{ dish.type.type }}</p>
+                    <a href="{% url 'kitchen:dish-detail' pk=dish.id %}" class="text-muted"><strong>Id:</strong> {{ dish.id }}</a>
+                  {% empty %}
+                    <p>No dishes!</p>
+                  {% endfor %}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}
