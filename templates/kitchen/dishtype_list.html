@@ -97,13 +97,13 @@
                   {% if page_obj.has_next %}
                     <a href="?page={{ page_obj.next_page_number }}">next&nbsp;<i
                         class="fas fa-angle-right text-lg opacity-8"></i></a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}"> previous&nbsp;
+                    <a href="?page={{ page_obj.paginator.num_pages }}"> last&nbsp;
                       <i class="fas fa-angle-double-right text-lg opacity-8"></i>
 
                     </a>
                   {% else %}
-                    <a>last&nbsp;<i class="fas fa-angle-right text-lg opacity-8"></i> </a>
-                    next&nbsp;<i class="fas fa-angle-double-right text-lg opacity-8"></i>
+                    <a>next&nbsp;<i class="fas fa-angle-right text-lg opacity-8"></i> </a>
+                    last&nbsp;<i class="fas fa-angle-double-right text-lg opacity-8"></i>
                   {% endif %}
 
                 </span>
