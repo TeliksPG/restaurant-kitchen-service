@@ -76,7 +76,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = Cook
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'years_of_experience')
 
 
 class LoginForm(forms.Form):
