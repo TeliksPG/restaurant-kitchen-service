@@ -1,4 +1,4 @@
-{% extends 'base-fullscreen.html' %}
+{% extends "base-fullscreen.html" %}
 
 {% block title %} Sign IN {% endblock title %}
 
@@ -29,7 +29,7 @@
               </div>
               <div class="card-body">
 
-                <form method="post" action="{% url 'login' %}" role="form">
+                <form method="post" action="{% url "login" %}" role="form">
 
                   {% csrf_token %}
 
@@ -52,7 +52,7 @@
               <div class="card-footer text-center pt-0 px-lg-2 px-1">
                 <p class="mb-4 text-sm mx-auto">
                   Don't have an account?
-                  <a href="{% url 'register' %}" class="font-weight-bold" style="color: #f1d3a5">Sign UP</a>
+                  <a href="{% url "register" %}" class="font-weight-bold" style="color: #f1d3a5">Sign UP</a>
                 </p>
               </div>
             </div>
