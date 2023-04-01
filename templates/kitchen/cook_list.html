@@ -6,39 +6,41 @@
 
 {% block content %}
 
-  {% include "includes/navigation-light.html" %}
+  {% include "includes/navigation.html" %}
+  <br>
+  <br>
+  <br>
 
   <div class="container mt-5">
     <div class="row">
       <div class="col-lg-12 mx-auto">
         <div class="position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
-          <div class="container border-bottom">
-            <div class="row justify-space-between py-2">
-              <div class="col-lg-3 me-auto">
+          <div class="container border-bottom" style="background: #ccd2db;">
+            <div class="row justify-space-between py-3" style="height: 72px">
+              <div class="col-lg-1 me-10">
                 <p class="lead text-dark pt-1 mb-0">Cook list</p>
               </div>
+              <div class="col-5 mx-lg-6">
 
-              <div class="col-lg-2">
-                <div class="nav-wrapper position-relative end-0">
-                  <a href="{% url 'kitchen:cook-create' %}" class="btn bg-gradient-primary btn-sm me-2"
+                <form action="" method="get">
+                  {{ search_form|crispy }}
+                </form>
+
+              </div>
+              <div class="col-lg-2 mx-lg-2">
+                <div class="nav-wrapper">
+                  <a href="{% url 'kitchen:cook-create' %}" class="btn btn-default me-1"
                      aria-hidden="true"
-                     style="margin-bottom: 0">
+                     style="margin-bottom: 0; background-color: #f1d3a5">
                     Create
                   </a>
                 </div>
               </div>
-
             </div>
           </div>
 
-          <div class="row text-center py-2 mt-3" style="height: 50px">
-            <div class="col-4 mx-auto">
-              <div class="input-group mb-4" style="margin: 0">
-                <form action="" method="get">
-                  {{ search_form|crispy }}
-                </form>
-              </div>
-            </div>
+          <div class="row text-center py-2 mt-3" style="height: 20px">
+
           </div>
 
           {% if cook_list %}
@@ -83,22 +85,36 @@
                     padding: 10px;
                 }
             </style>
-            <div class="col-lg-12 mx-auto">
-              <div class="pagination" id="centerLayer">
+            <div class="col-lg-12">
+              <div class="pagination text-center" id="centerLayer" style="text-align: center">
                 <span class="step-links">
-                    {% if page_obj.has_previous %}
-                      <a href="?page=1">&laquo; first</a>
-                      <a href="?page={{ page_obj.previous_page_number }}">&lsaquo; previous</a>
-                    {% endif %}
+                  {% if page_obj.has_previous %}
+                    <a href="?page=1"><i class="fas fa-angle-double-left text-lg opacity-8"></i> first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                      <i class="fas fa-angle-left text-lg opacity-8"></i>
+                      previous
+                    </a>
+                  {% else %}
+                    <a><i class="fas fa-angle-double-left text-lg opacity-8"></i> first</a>
+                    <i class="fas fa-angle-left text-lg opacity-8"></i> previous
+                  {% endif %}
 
                   <span class="current-page">
                         Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                     </span>
 
                   {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next &rsaquo;</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    <a href="?page={{ page_obj.next_page_number }}">next&nbsp;<i
+                        class="fas fa-angle-right text-lg opacity-8"></i></a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}"> previous&nbsp;
+                      <i class="fas fa-angle-double-right text-lg opacity-8"></i>
+
+                    </a>
+                  {% else %}
+                    <a>last&nbsp; <i class="fas fa-angle-right text-lg opacity-8"></i> </a>
+                    next&nbsp;<i class="fas fa-angle-double-right text-lg opacity-8"></i>
                   {% endif %}
+
                 </span>
               </div>
             </div>

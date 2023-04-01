@@ -14,7 +14,7 @@ class DishType(models.Model):
 
 
 class Cook(AbstractUser):
-    years_of_experience = models.IntegerField(blank=True, null=True)
+    years_of_experience = models.PositiveIntegerField(blank=True, null=True)
 
     class Meta:
         verbose_name = "cook"
@@ -32,8 +32,12 @@ class Dish(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    weight = models.PositiveIntegerField()
     type = models.ForeignKey(DishType, on_delete=models.CASCADE)
     cooks = models.ManyToManyField(Cook, related_name="dishes")
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
