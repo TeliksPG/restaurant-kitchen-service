@@ -3,7 +3,7 @@
 
 ## Check it out
 
-[restaurant project deployd in web](https://restaurant-kitchen-service-1wze.onrender.com/cooks/)
+[restaurant project deployd in web](https://restaurant-kitchen-service-1wze.onrender.com)
 
 
 ## Installation
