@@ -3,6 +3,9 @@
 
 ## Check it out
 
+* USERNAME: test_user
+* Password: t1e2s3t4
+
 [restaurant project deployd in web](https://restaurant-kitchen-service-1wze.onrender.com)
 
 
