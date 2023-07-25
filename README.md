@@ -1,5 +1,5 @@
 # Restaurant-kitchen-service
-> My first Django project for managing cooks and dishes in restaurant 
+> Django project for managing cooks and dishes in restaurant 
 
 ## Check it out
 
